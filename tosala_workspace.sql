@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Ven 09 Août 2019 à 11:29
+-- Généré le :  Ven 29 Août 2020 à 11:29
 -- Version du serveur :  5.6.21
 -- Version de PHP :  5.6.3
 
