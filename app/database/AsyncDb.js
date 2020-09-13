@@ -9,8 +9,9 @@ var _config = require('../database/config.js').mysqlConfig;
 
 /*Constructor Class*/
 function AsyncDb (mySQL, FileUtils) {
-	// body...
-	connection = mySQL.createConnection(_config);
+  // body...
+  connection = mySQL.createConnection('mysql://b4ff78d117cc32:2ebf249d@eu-cdbr-west-03.cleardb.net/heroku_ecc52e23303dc4f?reconnect=true');
+	//connection = mySQL.createConnection(_config);
     connection.connect(function(error) {
       if (error) {
         //connectionDataBase(connection)
