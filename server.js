@@ -32,7 +32,7 @@ app.use(flash());
 app.use('/static', express.static(path.join(__dirname, 'public')));
 //app.use(multer({ dest: './tmp/'}));
 
-server.listen(2212);
+server.listen(process.env.PORT ||2212);
 appFiles.FileUtils.logger('Hello, I\'m listening on 2212 port so, letwork !');
 var config = {
     socketIns:io,
