@@ -9,15 +9,16 @@ var _config = require('../database/config.js').mysqlConfig;
 
 /*Constructor Class*/
 function AsyncDb (mySQL, FileUtils) {
-  // body...
-  connection = mySQL.createConnection('mysql://b4ff78d117cc32:2ebf249d@eu-cdbr-west-03.cleardb.net/heroku_ecc52e23303dc4f?reconnect=true');
-	//connection = mySQL.createConnection(_config);
+	// body...
+  //connection = mySQL.createConnection('mysql://b4ff78d117cc32:2ebf249d@eu-cdbr-west-03.cleardb.net/heroku_ecc52e23303dc4f?reconnect=true');
+	connection = mySQL.createConnection(_config);
     connection.connect(function(error) {
       if (error) {
         //connectionDataBase(connection)
-          return FileUtils.logger('CONNECTION error: ' + error);
+        /*return*/ FileUtils.logger('CONNECTION error: ' + error);
+        setTimeout( AsyncDb, 2000);
       }
-      FileUtils.logger('La connection etablie !!!! from class AsyncDb');
+      FileUtils.logger('connection successful !!!! from class AsyncDb');
       //fn(this.connection)
   	});
   	fileUtils = FileUtils;
@@ -1285,7 +1286,7 @@ AsyncDb.prototype.updatePassword = function(email, newPassword, newHash, fn) {
         fileUtils.logger(err);
         fn(false)
     }else{
-        fileUtils.logger('dernier login a été mis à jour avec succès !');
+        fileUtils.logger('last login updated successfully !');
         fn(true)
     }
   });
@@ -1571,14 +1572,15 @@ function keepAlive () {
   var keeping = connection.query('SELECT * FROM user WHERE id = 1', function (err) {
     // body...
     if(err){
-      fileUtils.logger(err)
+      fileUtils.logger(err);
+      throw err;
     }else{
       fileUtils.logger('Keep alive worked !');
     }
   });
   setTimeout(function(){
     keepAlive();
-  }, 200000);
+  }, 20000);
 }
 
 function updateLastLogin (id) {
@@ -1588,7 +1590,7 @@ function updateLastLogin (id) {
     if(err){
         fileUtils.logger(err);
     }else{
-        fileUtils.logger('dernier login a été mis à jour avec succès !');
+        fileUtils.logger('last login updated successfully !');
     }
   });
 }
